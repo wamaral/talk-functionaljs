@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Programação funcional com Javascript moderno</title>
+    <meta name="description" content="Programação funcional com Javascript moderno">
+
+    <link rel="canonical" href="http://wamaral.org/talks/functional-js/">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous" />
+    <script>
+      $.noConflict();
+    </script>
+
+    <meta property="og:title" content="Programação funcional com Javascript moderno">
+    <meta property="og:image" content="http://blog.klipse.tech/assets/klipse.png">
+    <meta property="og:description" content="Programação funcional com Javascript moderno">
+    <meta property="og:site_name" content="wamaral.org/talks">
+    <meta property="article:author" content="Wagner Amaral">
+
+    <script>
+      window.klipse_settings = {
+        codemirror_options_in: {
+          indentUnit: 2,
+          lineWrapping: true,
+          lineNumbers: true,
+          autoCloseBrackets: true
+        },
+        codemirror_options_out: {
+          lineWrapping: true
+        },
+        eval_idle_msec: 1000,
+        selector: '.language-klipse',
+        selector_eval_js: '.language-klipse-eval-js',
+        selector_js: '.language-klipse-js'
+      };
+    </script>
+  </head>
+  <body>
+
+    <textarea id="logger"></textarea>
+    <input type="button" id="clearlog" value="Clear" />
+
+    <script>
+      const logger = document.getElementById("logger");
+      const clearbtn = document.getElementById("clearlog");
+
+      console.log = ((old_function, div_log) => (text) => {
+        old_function(text);
+        div_log.textContent += `${new Date()} - ${text}\n`;
+      })(console.log.bind(console), logger);
+
+      clearbtn.addEventListener("click", () => logger.textContent = "", true);
+    </script>
+
+    <code class="language-klipse-eval-js" data-js="intro-old.js"></code>
+
+    <script>
+      (() => {
+        if (window.loaded) return; window.loaded = true;
+        const script = document.createElement("script");
+        script.src = "http://app.klipse.tech/plugin/js/klipse_plugin.js?v=2.7.0";
+
+        let promises = [];
+        Array.prototype.slice.call(document.querySelectorAll("[data-js]")).forEach((el) => {
+          const promise = new Promise((res, rej) => {
+            const file = el.attributes["data-js"].value;
+            const req = new XMLHttpRequest();
+            req.addEventListener("load", () => el.insertAdjacentHTML("afterbegin", req.responseText));
+            req.addEventListener("load", res);
+            req.addEventListener("error", rej);
+            req.open("GET", `/samples/${file}`);
+            req.send();
+          });
+          promises.push(promise);
+        });
+
+        Promise.all(promises).then(() =>
+          document.querySelector("body").appendChild(script));
+      })();
+    </script>
+  </body>
+</html>
