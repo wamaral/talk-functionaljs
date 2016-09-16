@@ -46,7 +46,7 @@ fn.validate = function(firstname, lastname, email, amount) {
       }
       throw new Error("Email não existe");
     }).then(function() {
-      var hasAmountUrl = _this.url + "true";
+      var hasAmountUrl = _this.url + "true" + "?amount=" + amount;
       return $.get(hasAmountUrl);
     }).then(function(data, textStatus, xhr) {
       if (xhr.status !== 200) {
