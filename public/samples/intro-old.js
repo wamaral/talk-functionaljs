@@ -1,5 +1,5 @@
 function Validator() {
-  this.url = "http://localhost:3000/service/";
+  this.url = "/service";
   this.validFirstname = false;
   this.validLastname = false;
   this.validEmail = false;
@@ -33,7 +33,7 @@ fn.validate = function(firstname, lastname, email, amount) {
     throw new Error("Email inválido");
   }
 
-  var emailExistsUrl = this.url + "true";
+  var emailExistsUrl = this.url + "/true";
   return $.get(emailExistsUrl)
     .then(function(data, textStatus, xhr) {
       if (xhr.status !== 200) {
@@ -46,7 +46,7 @@ fn.validate = function(firstname, lastname, email, amount) {
       }
       throw new Error("Email não existe");
     }).then(function() {
-      var hasAmountUrl = _this.url + "true" + "?amount=" + amount;
+      var hasAmountUrl = _this.url + "/true" + "?amount=" + amount;
       return $.get(hasAmountUrl);
     }).then(function(data, textStatus, xhr) {
       if (xhr.status !== 200) {
@@ -63,10 +63,12 @@ fn.validate = function(firstname, lastname, email, amount) {
     });
 };
 
-var validator = new Validator();
-validator.validate("foo", "bar", "foo@bar.com", 100)
-  .then(function (suc) {
-    console.log("Validado com sucesso: " + validator.isValid());
-  }).catch(function (err) {
-    console.log("A validação falhou: " + err);
-  });
+(function() {
+  var validator = new Validator();
+  return validator.validate("foo", "bar", "foo@bar.com", 100)
+    .then(function (suc) {
+      console.log("Validado com sucesso: " + validator.isValid());
+    }).catch(function (err) {
+      console.log("A validação falhou: " + err);
+    });
+});

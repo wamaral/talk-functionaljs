@@ -1,6 +1,6 @@
 class Validator {
   constructor() {
-    this.url = "http://localhost:3000/service/";
+    this.url = "/service";
     this.validFirstname = false;
     this.validLastname = false;
     this.validEmail = false;
@@ -31,7 +31,7 @@ class Validator {
       throw new Error("Email inválido");
     }
 
-    const emailExistsUrl = `${this.url}true`;
+    const emailExistsUrl = `${this.url}/true`;
     return $.get(emailExistsUrl)
       .then((data, textStatus, xhr) => {
         if (xhr.status !== 200) {
@@ -44,7 +44,7 @@ class Validator {
         }
         throw new Error("Email não existe");
       }).then(() => {
-        const hasAmountUrl = `${this.url}true?amount=${amount}`;
+        const hasAmountUrl = `${this.url}/true?amount=${amount}`;
         return $.get(hasAmountUrl);
       }).then((data, textStatus, xhr) => {
         if (xhr.status !== 200) {
@@ -60,7 +60,9 @@ class Validator {
   }
 }
 
-const validator = new Validator();
-validator.validate("foo", "bar", "foo@bar.com", 100)
-  .then(() => console.log(`Validado com sucesso: ${validator.valid}`))
-  .catch((err) => console.log(`A validação falhou: ${err}`));
+(() => {
+  const validator = new Validator();
+  return validator.validate("foo", "bar", "foo@bar.com", 100)
+    .then(() => console.log(`Validado com sucesso: ${validator.valid}`))
+    .catch((err) => console.log(`A validação falhou: ${err}`));
+});
