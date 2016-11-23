@@ -1,4 +1,4 @@
-const products = [
+window.products = [
   { id: 1, name: "Dipirona", packing: "caixa" },
   { id: 2, name: "AAS", packing: "caixa" },
   { id: 3, name: "Advil", packing: "frasco" },
@@ -7,7 +7,7 @@ const products = [
   { id: 6, name: "Atroveran", packing: "ampola" },
 ];
 
-const suppliers = [
+window.suppliers = [
   { name: "Nestlé",
     catalogue: [
       { id: 1, price: 10, quantity: 500 },

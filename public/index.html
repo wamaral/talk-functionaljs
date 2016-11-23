@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,10 +17,18 @@
       $.noConflict();
     </script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/FarhadG/code-mirror-themes/master/themes/mreq.css" />
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.22.1/ramda.min.js"></script>
 
     <meta property="og:title" content="Programação funcional com Javascript moderno">
-    <meta property="og:image" content="http://blog.klipse.tech/assets/klipse.png">
+    <meta property="og:image" content="https://frontendmasters.com/assets/javascript_functional_lite.png">
     <meta property="og:description" content="Programação funcional com Javascript moderno">
     <meta property="og:site_name" content="wamaral.org/talks">
     <meta property="article:author" content="Wagner Amaral">
@@ -60,14 +68,31 @@
       clearbtn.addEventListener("click", () => logger.textContent = "", true);
     </script>
 
-    <h2>Base de dados</h2>
-    <code class="language-klipse-eval-js" data-js="data.js"></code>
+    <div class="container">
+      <h2>Base de dados</h2>
+      <code class="language-klipse-eval-js" data-js="data.js"></code>
+
+      <h2>OOP</h2>
+      <code class="language-klipse-eval-js" data-js="class.js"></code>
+
+      <h2>A new hope</h2>
+      <code class="language-klipse-eval-js" data-js="a-new-hope.js"></code>
+
+      <h2>Supplier by name</h2>
+      <code class="language-klipse-eval-js" data-js="supplier-by-name.js"></code>
+
+      <h2>Find prop eq</h2>
+      <code class="language-klipse-eval-js" data-js="find-prop-eq.js"></code>
+
+      <h2>Find price prop eq</h2>
+      <code class="language-klipse-eval-js" data-js="find-price-prop-eq.js"></code>
+    </div>
 
     <script>
       (() => {
         if (window.loaded) return; window.loaded = true;
         const script = document.createElement("script");
-        script.src = "http://app.klipse.tech/plugin/js/klipse_plugin.js?v=2.7.0";
+        script.src = "http://app.klipse.tech/plugin/js/klipse_plugin.js?v=4.0.1";
 
         let promises = [];
         Array.prototype.slice.call(document.querySelectorAll("[data-js]")).forEach((el) => {
